@@ -55,7 +55,7 @@ ROBOTSTXT_OBEY = True
 #DOWNLOADER_MIDDLEWARES = {
 #    'funssy_spider.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
-# LOG_LEVEL = 'DEBUG'
+LOG_LEVEL = 'DEBUG'
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html

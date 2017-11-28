@@ -29,8 +29,8 @@ class BbcArabicSpider(scrapy.Spider):
 
         }
         # 页面从1开始
-        url = 'http://www.bbc.com/arabic/%s' % (categories[u'体育'])
-        yield Request(url, meta={'category_number': categories[u'体育']},
+        url = 'http://www.bbc.com/arabic/%s' % (categories[u'文化艺术'])
+        yield Request(url, meta={'category_number': categories[u'文化艺术']},
                       callback=self.page)  # simulate login request
 
         # test_url = 'http://www.bc3ts.com/post/1040'
