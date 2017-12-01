@@ -44,17 +44,6 @@ class BbcArabicSpider(scrapy.Spider):
             return
         # scan_times = 0
         for item in items:
-        #     # print(item)
-        #     if scan_times >= self.scan_limit:
-        #         return
-        #     scan_times += 1
-        #     page_url = re.findall("'(/post/\d+)'", item.find('div', class_="card mb-4")['onclick'])[0]
-        #     doc_id = re.findall("\d{0,9}$", page_url)[0]
-        #     time_str = str(item.find('small', class_="card-text").text).strip() + ':00'
-        #     print(time.mktime(time.strptime(time_str, "%Y-%m-%d %H:%M:%S")))
-        #
-        #     url = self.base_url + page_url
-        #     yield Request(url, meta={'doc_id': doc_id, 'time': time}, callback=self.article)  # simulate login request
             title = item.find('h3', class_='title-link__title').text
             subtitle = item.find('p', class_='eagle-item__summary').text
             create_time = item.find('li', class_='mini-info-list__item').text
