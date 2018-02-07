@@ -9,7 +9,6 @@ import time
 import json
 import re
 import hashlib
-import cv2.cv as cv
 
 
 class AlarabiyaSpider(scrapy.Spider):
@@ -21,9 +20,9 @@ class AlarabiyaSpider(scrapy.Spider):
 
     def start_requests(self):
         categories = {
-            "medicine-and-health": u"健康",
-            "technology": u"科技",
-            "culture-and-art": u"文化",
+            "el-dia-maldito": u"男士健康-新闻",
+            "reto-mh": u"男士健康-每日挑战",
+            "top-trainer": u"男士健康-顶级训练师",
             # "science": u"",
             "sport": u"体育",
             "arab-and-world/gulf": u"社会",

@@ -8,7 +8,7 @@ import os
 # 这个参数用于生成命令行解释器
 
 
-os.system("scrapy crawl alarabiya")
+os.system("scrapy crawl twitter_tweets")
 #os.system("scrapy crawl funssy")
 
 
