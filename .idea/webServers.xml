@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d4d44367-1a1f-4e79-a2a2-64a0f24f487b" name="us_ap" url="http://localhost">
+        <fileTransfer host="localhost" port="10801" privateKey="C:\cygwin64\home\Leon\.ssh\id_rsa" rootFolder="/home/xinyu.du" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="10801" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

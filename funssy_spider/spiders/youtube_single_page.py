@@ -15,6 +15,7 @@ import hashlib
 import cv2.cv as cv
 import lxml
 from urllib import unquote
+from ..feeds_back_utils import *
 
 class YoutubeSpider(scrapy.Spider):
     name = 'youtube_single'
@@ -28,23 +29,92 @@ class YoutubeSpider(scrapy.Spider):
     max_duration = 300
     # channel_list = get_channel_list('like', 'Thailand')
     channel_list = [
+
+
         # 'https://www.youtube.com/watch?v=YmLwu1hQLIc',
         # 'https://www.youtube.com/watch?v=usosU1XnEow',
         # 'https://www.youtube.com/watch?v=NLGLl_fSIMI',
-        'https://www.youtube.com/watch?v=TqKOni-Qyuw',
-        'https://www.youtube.com/watch?v=JHD2f38MlDk',
-        'https://www.youtube.com/watch?v=hUADnAxNf6U',
-        'https://www.youtube.com/watch?v=VSKuhdmYkUU',
-        'https://www.youtube.com/watch?v=3tUCuMSPQwE',
-        'https://www.youtube.com/watch?v=uUukt4SGeT0',
-        'https://www.youtube.com/watch?v=-SY-aeSplco',
-        'https://www.youtube.com/watch?v=4BiWtH0HywY',
-        'https://www.youtube.com/watch?v=No35-c4zXjo',
-        'https://www.youtube.com/watch?v=MVkkdjUoHI4',
+        # 'https://www.youtube.com/watch?v=TqKOni-Qyuw',
+        # 'https://www.youtube.com/watch?v=JHD2f38MlDk',
+        # 'https://www.youtube.com/watch?v=hUADnAxNf6U',
+        # 'https://www.youtube.com/watch?v=VSKuhdmYkUU',
+        # 'https://www.youtube.com/watch?v=3tUCuMSPQwE',
+        # 'https://www.youtube.com/watch?v=uUukt4SGeT0',
+        # 'https://www.youtube.com/watch?v=-SY-aeSplco',
+        # 'https://www.youtube.com/watch?v=4BiWtH0HywY',
+        # 'https://www.youtube.com/watch?v=No35-c4zXjo',
+        # 'https://www.youtube.com/watch?v=MVkkdjUoHI4',
+        # 'https://www.youtube.com/watch?v=Acf7ut-R2hY',
+        # 'https://www.youtube.com/watch?v=G3KLR3JG8bE',
+        # 'https://www.youtube.com/watch?v=Ct9BFr9XBaI',
+        # 'https://www.youtube.com/watch?v=d2RO-vkdCIk',
+        # 'https://www.youtube.com/watch?v=6OcOO1k-vGE'
+        # 'https://www.youtube.com/watch?v=IRjtuOaBLbE'
+        # 'https://www.youtube.com/watch?v=QyT7Sq6fJfs',
+        # 'https://www.youtube.com/watch?v=6Xw3504AMmY',
+        # 'https://www.youtube.com/watch?v=rNE-yv8rbH4',
+        # 'https://www.youtube.com/watch?v=4xNo2X1ZunM',
+        # 'https://www.youtube.com/watch?v=o3T_o4WM-n8',
+        # 'https://www.youtube.com/watch?v=v3y7FE76H7c',
+        # 'https://www.youtube.com/watch?v=uTL3bKrWUI4',
+        # 'https://www.youtube.com/watch?v=fzEB2lkSbAQ',
+        # 'https://www.youtube.com/watch?v=il4VWNkI_rA',
+        # 'https://www.youtube.com/watch?v=O8nXm2OmEqQ',
+        # 'https://www.youtube.com/watch?v=g68BHT-Gbto',
+        # 'https://www.youtube.com/watch?v=y3Gg7TTGceg',
+        # 'https://www.youtube.com/watch?v=YuOBzWF0Aws',
+        # 'https://www.youtube.com/watch?v=N_AFMj6swg8',
+        # 'https://www.youtube.com/watch?v=0-CLhJ-a4IU',
+        # 'https://www.youtube.com/watch?v=HVQGYANFRsc',
+        # 'https://www.youtube.com/watch?v=OiYlLHZwrhI',
+        # 'https://www.youtube.com/watch?v=Zsitco6PbAc',
+        # 'https://www.youtube.com/watch?v=O_KmeA7yNgY',
+        # 'https://www.youtube.com/watch?v=p2JpSCYQKFs',
+        # 'https://www.youtube.com/watch?v=jsnyz__pc5M',
+        # 'https://www.youtube.com/watch?v=czh4rsDoxgw',
+        # 'https://www.youtube.com/watch?v=dNW0B0HsvVs',
+        # 'https://www.youtube.com/watch?v=_H-ANXeinuQ',
+        # 'https://www.youtube.com/watch?v=qpzBe1bzFKc',
+        # 'https://www.youtube.com/watch?v=yu8ASbIDvrY',
+        # 'https://www.youtube.com/watch?v=UFz3K9ByUqE',
+        # 'https://www.youtube.com/watch?v=nqP1x8VxrTU',
+        # 'https://www.youtube.com/watch?v=ayKYK_8E1jY',
+        # 'https://www.youtube.com/watch?v=8fvSqcgxMK0',
+        # 'https://www.youtube.com/watch?v=ayKYK_8E1jY',
+        # 'https://www.youtube.com/watch?v=nqP1x8VxrTU',
+        # 'https://www.youtube.com/watch?v=v3y7FE76H7c',
+        # 'https://www.youtube.com/watch?v=jYnEHDHp32E',
+        # 'https://www.youtube.com/watch?v=o3T_o4WM-n8',
+        # 'https://www.youtube.com/watch?v=41d9Bd7m8js',
+        # 'https://www.youtube.com/watch?v=e6i6caEKnks',
+        # 'https://www.youtube.com/watch?v=e14xmWKFgEc',
+        # 'https://www.youtube.com/watch?v=HuwaFB8NLBg',
+        # 'https://www.youtube.com/watch?v=RnOAzmZQd_c',
+        # 'https://www.youtube.com/watch?v=McRNSFGwqtY',
+        # 'https://www.youtube.com/watch?v=NooW_RbfdWI',
+        # 'https://www.youtube.com/watch?v=IRjtuOaBLbE',
+        # 'https://www.youtube.com/watch?v=ayKYK_8E1jY',
+        # 'https://www.youtube.com/watch?v=nqP1x8VxrTU',
+        # 'https://www.youtube.com/watch?v=v3y7FE76H7c',
+        # 'https://www.youtube.com/watch?v=jYnEHDHp32E',
+        # 'https://www.youtube.com/watch?v=o3T_o4WM-n8',
+        # 'https://www.youtube.com/watch?v=41d9Bd7m8js',
+        # 'https://www.youtube.com/watch?v=e6i6caEKnks',
+        # 'https://www.youtube.com/watch?v=e14xmWKFgEc',
+        # 'https://www.youtube.com/watch?v=HuwaFB8NLBg',
+        # 'https://www.youtube.com/watch?v=RnOAzmZQd_c',
+        # 'https://www.youtube.com/watch?v=McRNSFGwqtY',
+        # 'https://www.youtube.com/watch?v=NooW_RbfdWI',
+        # 'https://www.youtube.com/watch?v=IRjtuOaBLbE',
+        # 'https://www.youtube.com/watch?v=msyf4c5x7EY',
+        # 'https://www.youtube.com/watch?v=nC3UQhDAJ0s',
+        # 'https://www.youtube.com/watch?v=lh9Fbrn_W8A',
+        # 'https://www.youtube.com/watch?v=UXhslfACJtc',
     ]
 
     def __init__(self, *a, **kw):
         super(YoutubeSpider, self).__init__(*a, **kw)
+        #self.channel_list = get_channel_list('youtube_tops', 'United States of America')
         dispatcher.connect(self.spider_idle, signals.spider_idle)
 
     def spider_idle(self):
