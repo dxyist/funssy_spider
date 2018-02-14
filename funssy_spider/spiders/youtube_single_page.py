@@ -17,6 +17,7 @@ import lxml
 from urllib import unquote
 from ..feeds_back_utils import *
 
+
 class YoutubeSpider(scrapy.Spider):
     name = 'youtube_single'
     # allowed_domains = ['http://www.alarabiya.net']
@@ -29,7 +30,6 @@ class YoutubeSpider(scrapy.Spider):
     max_duration = 300
     # channel_list = get_channel_list('like', 'Thailand')
     channel_list = [
-
 
         # 'https://www.youtube.com/watch?v=YmLwu1hQLIc',
         # 'https://www.youtube.com/watch?v=usosU1XnEow',
@@ -108,14 +108,22 @@ class YoutubeSpider(scrapy.Spider):
         # 'https://www.youtube.com/watch?v=IRjtuOaBLbE',
         # 'https://www.youtube.com/watch?v=msyf4c5x7EY',
         # 'https://www.youtube.com/watch?v=nC3UQhDAJ0s',
-        # 'https://www.youtube.com/watch?v=lh9Fbrn_W8A',
-        # 'https://www.youtube.com/watch?v=UXhslfACJtc',
+        'https://www.youtube.com/watch?v=lh9Fbrn_W8A',
+        'https://www.youtube.com/watch?v=UXhslfACJtc',
     ]
 
     def __init__(self, *a, **kw):
         super(YoutubeSpider, self).__init__(*a, **kw)
-        #self.channel_list = get_channel_list('youtube_tops', 'United States of America')
+        # self.channel_list = get_channel_list('youtube_tops', 'United States of America')
         dispatcher.connect(self.spider_idle, signals.spider_idle)
+        dispatcher.connect(self.spider_opened, signals.spider_opened)
+        dispatcher.connect(self.spider_closed, signals.spider_closed)
+
+    def spider_opened(self):
+        print('spider_opened!')
+
+    def spider_closed(self):
+        print('spider_close!')
 
     def spider_idle(self):
         if self.channel_list:
@@ -130,7 +138,6 @@ class YoutubeSpider(scrapy.Spider):
             dont_filter=True,
             callback=self.parse_page
         )
-
 
     def parse_page(self, response):
         # print response.url
@@ -165,7 +172,7 @@ class YoutubeSpider(scrapy.Spider):
 
         # 正则获取播放时间
         m_value, s_value = \
-        re.findall('PT([0-9]+)M([0-9]+)S', tree.xpath(duration_raw_selector)[0])[0]
+            re.findall('PT([0-9]+)M([0-9]+)S', tree.xpath(duration_raw_selector)[0])[0]
         # second_value = re.findall('<meta itemprop="duration" content="PT[0-9]+M([0-9]+)S">', body_instance)[0]
         raw['duration'] = int(m_value) * 60 + int(s_value)
         # if raw['duration'] > self.max_duration:
@@ -178,7 +185,6 @@ class YoutubeSpider(scrapy.Spider):
             dont_filter=True,
             callback=self.parse_video
         )
-
 
     def parse_video(self, response):
         def _parse_stream_map(text):
