@@ -31,8 +31,8 @@ class FacebookSpider(scrapy.Spider):
     # channel_list = get_channel_list('like', 'Thailand')
     channel_list = [
         'https://www.facebook.com/findmeafunnyvideo/videos/2097671723591126/',
-        'https://www.facebook.com/findmeafunnyvideo/videos/2097606853597613/',
-        'https://www.facebook.com/findmeafunnyvideo/videos/1990760991244729/',
+        # 'https://www.facebook.com/findmeafunnyvideo/videos/2097606853597613/',
+        # 'https://www.facebook.com/findmeafunnyvideo/videos/1990760991244729/',
     ]
 
     def __init__(self, *a, **kw):
@@ -62,20 +62,38 @@ class FacebookSpider(scrapy.Spider):
         title_selector = '//*[@id="facebook"]/head/meta[5]/@content'
         thumbnails_selector = '//*[@id="facebook"]/head/meta[6]/@content'
         video_selector = '//*[@id="facebook"]/body/script[9]/text()'
+
+        # with open('C:\Users\Leon\PycharmProjects\\funssy_spider\\body_instance','a') as f:
+        #     f.write(str(response.head))
         video_data = re.findall('videoData:\[(.*?)\}', tree.xpath(video_selector)[0].strip())[0] + '}'
-        raw['video_data'] = video_data
-        raw['video'] = re.findall('sd_src:\"(.*?)\",',video_data)[0]
-        raw['title'] = tree.xpath(title_selector)[0].strip()
-        # raw['subtitle'] = tree.xpath(publisher_selector)[0]
-        raw['publisher'] = tree.xpath(publisher_selector)[0]
-        raw['source_url'] = response.url
-        raw['thumbnails'] = [tree.xpath(thumbnails_selector)[0]]
-        # raw['time'] = tree.xpath(published_date_selector)[0]
-        raw['doc_id'] = re.findall('videos/([0-9]+)', response.url)[0]
-        raw['video_width'] = re.findall('original_width:(.*?),',video_data)[0]
-        raw['video_height'] = re.findall('original_height:(.*?),',video_data)[0]
-        # raw['genre'] = tree.xpath(genre_selector)[0]
-        # raw['hit_counts'] = tree.xpath(hitcount_selector)[0]
+
+        # #raw['video_data'] = video_data
+        raw['video'] = re.findall('sd_src:\"(.*?)\",', video_data)[0]
+        raw_duration = re.findall('\d+', re.findall('Duration: (.*?) second', body_instance)[0])
+        raw_duration = map(int, raw_duration)
+        raw_duration.reverse()
+
+
+        # for each in raw_duration:
+
+        print(raw_duration)
+        # raw['duration'] = (
+        #     int(raw_duration.split('minute,')[-2].strip()) * 60 + int(raw_duration.split('minute,')[-1].strip()) if len(
+        #         raw_duration.split('minute,')) == 2 else int(raw_duration.split('minute,')[-1].strip()))
+
+
+        # # raw['duration'] = int()
+        # raw['title'] = tree.xpath(title_selector)[0].strip()
+        # # raw['subtitle'] = tree.xpath(publisher_selector)[0]
+        # raw['publisher'] = tree.xpath(publisher_selector)[0]
+        # raw['source_url'] = response.url
+        # raw['thumbnails'] = [tree.xpath(thumbnails_selector)[0]]
+        # # raw['time'] = tree.xpath(published_date_selector)[0]
+        # raw['doc_id'] = re.findall('videos/([0-9]+)', response.url)[0]
+        # raw['video_width'] = re.findall('original_width:(.*?),', video_data)[0]
+        # raw['video_height'] = re.findall('original_height:(.*?),', video_data)[0]
+        # # raw['genre'] = tree.xpath(genre_selector)[0]
+        # # raw['hit_counts'] = tree.xpath(hitcount_selector)[0]
 
 
 
